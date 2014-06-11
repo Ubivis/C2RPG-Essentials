@@ -46,9 +46,9 @@ AddNumberParam("MinRooms", "Minimum Number of Rooms to be generated", "10");
 AddNumberParam("MaxRooms", "Maximum Number of Rooms to be generated", "20");
 AddNumberParam("MinSize", "Minimum Size of Map to be generated", "5");
 AddNumberParam("MaxSize", "Maximum Size of Map to be generated", "15");
-AddComboParam("Yes");
-AddComboParam("No");
-AddComboParam("SquashRooms", "Squash Rooms by moving the rooms closer to one another to get rid of large gaps?");
+AddComboParamOption("Yes");
+AddComboParamOption("No");
+AddComboParam("SquashRooms", "Moving the rooms closer to one another to get rid of large gaps?");
 
 ////////////////////////////////////////
 // Actions
@@ -62,8 +62,9 @@ AddComboParam("SquashRooms", "Squash Rooms by moving the rooms closer to one ano
 //			 script_name);		// corresponding runtime function name
 
 // example
-AddStringParam("Message", "Enter a string to alert.");
-AddAction(0, af_none, "Alert", "My category", "Alert {0}", "Description for my action!", "MyAction");
+AddStringParam("Create Dungeon", "Create a dungeon and populate array.");
+AddObjectParam("Array", "Select array to populate with dungeon");
+AddAction(0, af_none, "Create", "Dungeon", "Create Dungeon", "Create a dungeon and populate [0]. <b>NOTE:</b> <i>existing values will be overwritten</i>.", "createDungeon");
 
 ////////////////////////////////////////
 // Expressions
@@ -77,7 +78,6 @@ AddAction(0, af_none, "Alert", "My category", "Alert {0}", "Description for my a
 //				 description);	// description in expressions panel
 
 // example
-AddExpression(0, ef_return_number, "Leet expression", "My category", "MyExpression", "Return the number 1337.");
 
 ////////////////////////////////////////
 ACESDone();
