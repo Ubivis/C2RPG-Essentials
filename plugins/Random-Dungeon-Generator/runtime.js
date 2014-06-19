@@ -312,9 +312,9 @@ var Helpers = {
         	
 		Dungeon.Generate(MinRooms, MaxRooms, MinSize, MaxSize, Size, squash);
         	var array_set = cr.plugins_.Arr.prototype.acts.SetXYZ;
-        	for (var x=0; x<MapSize;x++)
+        	for (var x=0; x<Size;x++)
         	{
-        		for (var z=0; z<MapSize;z++)	
+        		for (var z=0; z<Size;z++)	
         		{
         			array_set.apply(array_obj, [x, 0, z, Dungeon.map[x][z]])
                		}
