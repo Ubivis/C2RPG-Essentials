@@ -133,6 +133,7 @@ cr.plugins_.UBIRDG = function(runtime)
 	/**END-PREVIEWONLY**/
 
 var Dungeon = {
+    MapSize
     map: null,
     rooms: [],
     Generate: function () {
@@ -299,7 +300,7 @@ var Helpers = {
 	function Acts() {};
 
 	// the example action
-	Acts.prototype.createDungeon = function (MinRooms, MaxRooms, MinSize, MaxSize, MapSize, squash, array_objs)
+	Acts.prototype.createDungeon = function (MinRooms, MaxRooms, MinSize, MaxSize, Size, squash, array_objs)
 	{
 	    	assert2(cr.plugins_.Arr, "[CSV2Array] Error:No Array object found.");
 	    	
@@ -310,7 +311,7 @@ var Helpers = {
         	//prepare array to be filled with data
         	cr.plugins_.Arr.prototype.acts.SetSize.apply(array_obj, [MaxSize, 1, MaxSize]);
         	
-	Dungeon.Generate();
+		Dungeon.Generate(Size);
         	var array_set = cr.plugins_.Arr.prototype.acts.SetXYZ;
         	for (x=0; x<MapSize;x++)
         	{
