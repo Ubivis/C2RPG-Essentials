@@ -299,7 +299,7 @@ var Helpers = {
 	function Acts() {};
 
 	// the example action
-	Acts.prototype.Create = function (MinRooms, MaxRooms, MinSize, MaxSize, MapSize, squash, array_objs)
+	Acts.prototype.createDungeon = function (MinRooms, MaxRooms, MinSize, MaxSize, MapSize, squash, array_objs)
 	{
 	    	assert2(cr.plugins_.Arr, "[CSV2Array] Error:No Array object found.");
 	    	
