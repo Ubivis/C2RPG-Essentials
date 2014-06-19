@@ -49,6 +49,7 @@ AddNumberParam("MaxSize", "Maximum Size of Map to be generated", "15");
 AddComboParamOption("Yes");
 AddComboParamOption("No");
 AddComboParam("SquashRooms", "Moving the rooms closer to one another to get rid of large gaps?");
+AddObjectParam("Array", "Select array to populate with dungeon");
 
 ////////////////////////////////////////
 // Actions
@@ -63,8 +64,9 @@ AddComboParam("SquashRooms", "Moving the rooms closer to one another to get rid 
 
 // example
 AddStringParam("Create Dungeon", "Create a dungeon and populate array.");
-AddObjectParam("Array", "Select array to populate with dungeon");
-AddAction(0, af_none, "Create", "Dungeon", "Create Dungeon", "Create a dungeon and populate [0]. <b>NOTE:</b> <i>existing values will be overwritten</i>.", "createDungeon");
+AddAction(0, af_none, "Create", "Dungeon", "Create Dungeon", "Create a dungeon and populate defined array. <b>NOTE:</b> <i>existing values will be overwritten</i>.", "createDungeon");
+AddStringParam("Squash Rooms", "Moving the generated rooms closer to one another to get rid of large gaps.");
+AddAction(1, af_none, "Squash", "Dungeon", "Squash Rooms", "Squash generated rooms.")
 
 ////////////////////////////////////////
 // Expressions
