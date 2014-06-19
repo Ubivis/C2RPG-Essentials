@@ -172,11 +172,11 @@ var Dungeon = {
             var roomA = this.rooms[i];
             var roomB = this.FindClosestRoom(roomA);
 
-            pointA = {
+            var pointA = {
                 x: Helpers.GetRandom(roomA.x, roomA.x + roomA.w),
                 y: Helpers.GetRandom(roomA.y, roomA.y + roomA.h)
             };
-            pointB = {
+            var pointB = {
                 x: Helpers.GetRandom(roomB.x, roomB.x + roomB.w),
                 y: Helpers.GetRandom(roomB.y, roomB.y + roomB.h)
             };
