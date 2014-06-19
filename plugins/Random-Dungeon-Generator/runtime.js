@@ -316,7 +316,7 @@ var Helpers = {
         	{
         		for (z=0; z<MapSize;z++)	
         		{
-        			array_set.apply(array_obj, [x, 0, z, Dungeon.map[x][y]])
+        			array_set.apply(array_obj, [x, 0, z, Dungeon.map[x][z]])
                		}
         	}
 	};
