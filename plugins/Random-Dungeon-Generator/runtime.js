@@ -308,7 +308,7 @@ var Helpers = {
         	assert2(is_array_inst, "[CSV2Array] Error:Need an array object.");
         	
         	//prepare array to be filled with data
-        	cr.plugins_.Arr.prototype.acts.SetSize.apply(array_obj, [MaxSize, 1, MaxSize]);
+        	cr.plugins_.Arr.prototype.acts.SetSize.apply(array_obj, [Size, Size, 1]);
         	
 		Dungeon.Generate(MinRooms, MaxRooms, MinSize, MaxSize, Size, squash);
         	var array_set = cr.plugins_.Arr.prototype.acts.SetXYZ;
@@ -316,7 +316,7 @@ var Helpers = {
         	{
         		for (var z=0; z<Size;z++)	
         		{
-        			array_set.apply(array_obj, [x, 0, z, Dungeon.map[x][z]])
+        			array_set.apply(array_obj, [x, z, 0, Dungeon.map[x][z]])
                		}
         	}
 	};
