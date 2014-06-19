@@ -132,6 +132,153 @@ cr.plugins_.UBIRDG = function(runtime)
 	};
 	/**END-PREVIEWONLY**/
 
+var Dungeon = {
+    map: null,
+    rooms: [],
+    Generate: function () {
+        this.map = [];
+        for (var x = 0; x < this.map_size; x++) {
+            this.map[x] = [];
+            for (var y = 0; y < this.map_size; y++) {
+                this.map[x][y] = 0;
+            }
+        }
+
+        var room_count = Helpers.GetRandom(MinRoom, MaxRoom);
+
+        for (var i = 0; i < room_count; i++) {
+            var room = {};
+
+            room.x = Helpers.GetRandom(1, MapSize - MaxSize - 1);
+            room.y = Helpers.GetRandom(1, MapSize - MaxSize - 1);
+            room.w = Helpers.GetRandom(MinSize, MaxSize);
+            room.h = Helpers.GetRandom(MinSize, MaxSize);
+
+            if (this.DoesCollide(room)) {
+                i--;
+                continue;
+            }
+            room.w--;
+            room.h--;
+
+            this.rooms.push(room);
+        }
+	if (Squash == 0)
+	{
+        	this.SquashRooms();
+	}
+
+        for (i = 0; i < room_count; i++) {
+            var roomA = this.rooms[i];
+            var roomB = this.FindClosestRoom(roomA);
+
+            pointA = {
+                x: Helpers.GetRandom(roomA.x, roomA.x + roomA.w),
+                y: Helpers.GetRandom(roomA.y, roomA.y + roomA.h)
+            };
+            pointB = {
+                x: Helpers.GetRandom(roomB.x, roomB.x + roomB.w),
+                y: Helpers.GetRandom(roomB.y, roomB.y + roomB.h)
+            };
+
+            while ((pointB.x != pointA.x) || (pointB.y != pointA.y)) {
+                if (pointB.x != pointA.x) {
+                    if (pointB.x > pointA.x) pointB.x--;
+                    else pointB.x++;
+                } else if (pointB.y != pointA.y) {
+                    if (pointB.y > pointA.y) pointB.y--;
+                    else pointB.y++;
+                }
+
+                this.map[pointB.x][pointB.y] = 1;
+            }
+        }
+
+        for (i = 0; i < room_count; i++) {
+            var room = this.rooms[i];
+            for (var x = room.x; x < room.x + room.w; x++) {
+                for (var y = room.y; y < room.y + room.h; y++) {
+                    this.map[x][y] = 1;
+                }
+            }
+        }
+
+        for (var x = 0; x < MapSize; x++) {
+            for (var y = 0; y < MapSize; y++) {
+                if (this.map[x][y] == 1) {
+                    for (var xx = x - 1; xx <= x + 1; xx++) {
+                        for (var yy = y - 1; yy <= y + 1; yy++) {
+                            if (this.map[xx][yy] == 0) this.map[xx][yy] = 2;
+                        }
+                    }
+                }
+            }
+        }
+       return this.map;
+    },
+    FindClosestRoom: function (room) {
+        var mid = {
+            x: room.x + (room.w / 2),
+            y: room.y + (room.h / 2)
+        };
+        var closest = null;
+        var closest_distance = 1000;
+        for (var i = 0; i < this.rooms.length; i++) {
+            var check = this.rooms[i];
+            if (check == room) continue;
+            var check_mid = {
+                x: check.x + (check.w / 2),
+                y: check.y + (check.h / 2)
+            };
+            var distance = Math.min(Math.abs(mid.x - check_mid.x) - (room.w / 2) - (check.w / 2), Math.abs(mid.y - check_mid.y) - (room.h / 2) - (check.h / 2));
+            if (distance < closest_distance) {
+                closest_distance = distance;
+                closest = check;
+            }
+        }
+        return closest;
+    },
+    SquashRooms: function () {
+        for (var i = 0; i < 10; i++) {
+            for (var j = 0; j < this.rooms.length; j++) {
+                var room = this.rooms[j];
+                while (true) {
+                    var old_position = {
+                        x: room.x,
+                        y: room.y
+                    };
+                    if (room.x > 1) room.x--;
+                    if (room.y > 1) room.y--;
+                    if ((room.x == 1) && (room.y == 1)) break;
+                    if (this.DoesCollide(room, j)) {
+                        room.x = old_position.x;
+                        room.y = old_position.y;
+                        break;
+                    }
+                }
+            }
+        }
+    },
+    DoesCollide: function (room, ignore) {
+        for (var i = 0; i < this.rooms.length; i++) {
+            if (i == ignore) continue;
+            var check = this.rooms[i];
+            if (!((room.x + room.w < check.x) || (room.x > check.x + check.w) || (room.y + room.h < check.y) || (room.y > check.y + check.h))) return true;
+        }
+
+        return false;
+    }
+};
+
+
+var Helpers = {
+    GetRandom: function (low, high) {
+        return~~ (Math.random() * (high - low)) + low;
+    }
+};
+
+
+
 	//////////////////////////////////////
 	// Conditions
 	function Cnds() {};
@@ -152,10 +299,26 @@ cr.plugins_.UBIRDG = function(runtime)
 	function Acts() {};
 
 	// the example action
-	Acts.prototype.MyAction = function (myparam)
+	Acts.prototype.Create = function (MinRooms, MaxRooms, MinSize, MaxSize, MapSize, squash, array_objs)
 	{
-		// alert the message
-		alert(myparam);
+	    	assert2(cr.plugins_.Arr, "[CSV2Array] Error:No Array object found.");
+	    	
+        	var array_obj = array_objs.getFirstPicked();
+        	var is_array_inst = (array_obj instanceof cr.plugins_.Arr.prototype.Instance);
+        	assert2(is_array_inst, "[CSV2Array] Error:Need an array object.");
+        	
+        	//prepare array to be filled with data
+        	cr.plugins_.Arr.prototype.acts.SetSize.apply(array_obj, [MaxSize, 1, MaxSize]);
+        	
+	Dungeon.Generate();
+        	var array_set = cr.plugins_.Arr.prototype.acts.SetXYZ;
+        	for (x=0; x<MapSize;x++)
+        	{
+        		for (z=0; z<MapSize;z++)	
+        		{
+        			array_set.apply(array_obj, [x, 0, z, Dungeon.map[x][y]])
+               		}
+        	}
 	};
 	
 	// ... other actions here ...
