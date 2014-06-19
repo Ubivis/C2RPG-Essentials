@@ -133,10 +133,9 @@ cr.plugins_.UBIRDG = function(runtime)
 	/**END-PREVIEWONLY**/
 
 var Dungeon = {
-    MapSize,
     map: null,
     rooms: [],
-    Generate: function () {
+    Generate: function (MapSize) {
         this.map = [];
         for (var x = 0; x < MapSize; x++) {
             this.map[x] = [];
