@@ -1,3 +1,9 @@
-When this plugin is functional, you will be able to populate a random dungeon with just one event in C2
+This Plugin is based on the great work of BigBadWofl (http://bigbadwofl.me/).
 
-Please Note: This PlugIn is not functional yet!
+What does it do?
+================
+This Plugin generates a random Dungeon and fills an Array with the data.
+Each x/y coordinate is filled with the following information:
+1=Floor
+2=Wall
+3=Empty
