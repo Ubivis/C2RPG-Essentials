@@ -135,7 +135,7 @@ cr.plugins_.UBIRDG = function(runtime)
 var Dungeon = {
     map: null,
     rooms: [],
-    Generate: function (MapSize) {
+    Generate: function (MinRoom, MaxRoom, MinSize, MaxSize, MapSize, Squash) {
         this.map = [];
         for (var x = 0; x < MapSize; x++) {
             this.map[x] = [];
@@ -310,7 +310,7 @@ var Helpers = {
         	//prepare array to be filled with data
         	cr.plugins_.Arr.prototype.acts.SetSize.apply(array_obj, [MaxSize, 1, MaxSize]);
         	
-		Dungeon.Generate(Size);
+		Dungeon.Generate(MinRooms, MaxRooms, MinSize, MaxSize, Size, squash);
         	var array_set = cr.plugins_.Arr.prototype.acts.SetXYZ;
         	for (x=0; x<MapSize;x++)
         	{
