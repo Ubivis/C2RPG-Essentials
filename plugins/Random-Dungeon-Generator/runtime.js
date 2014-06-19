@@ -8,7 +8,7 @@ assert2(cr.plugins_, "cr.plugins_ not created");
 // Plugin class
 // *** CHANGE THE PLUGIN ID HERE *** - must match the "id" property in edittime.js
 //          vvvvvvvv
-cr.plugins_.MyPlugin = function(runtime)
+cr.plugins_.UBIRDG = function(runtime)
 {
 	this.runtime = runtime;
 };
@@ -18,7 +18,7 @@ cr.plugins_.MyPlugin = function(runtime)
 	/////////////////////////////////////
 	// *** CHANGE THE PLUGIN ID HERE *** - must match the "id" property in edittime.js
 	//                            vvvvvvvv
-	var pluginProto = cr.plugins_.MyPlugin.prototype;
+	var pluginProto = cr.plugins_.UBIRDG.prototype;
 		
 	/////////////////////////////////////
 	// Object type class
