@@ -137,9 +137,9 @@ var Dungeon = {
     rooms: [],
     Generate: function () {
         this.map = [];
-        for (var x = 0; x < this.map_size; x++) {
+        for (var x = 0; x < MapSize; x++) {
             this.map[x] = [];
-            for (var y = 0; y < this.map_size; y++) {
+            for (var y = 0; y < MapSize; y++) {
                 this.map[x][y] = 0;
             }
         }
