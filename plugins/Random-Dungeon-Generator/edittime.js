@@ -65,7 +65,7 @@ AddComboParamOption("Yes");
 AddComboParamOption("No");
 AddComboParam("Squash","Squash Rooms", "If set to <b>yes</b>, this moves the generated rooms closer to each other");
 AddObjectParam("Array", "Select array to populate with dungeon");
-AddAction(0, af_none, "Create", "Dungeon", "Create Dungeon", "Create a dungeon and populate defined array. <b>NOTE:</b> <i>existing values will be overwritten</i>.", "createDungeon");
+AddAction(1, 0, "Create Dungeon", "Dungeon", "Create Dungeon", "Create a dungeon and populate defined array. <b>NOTE:</b> <i>existing values will be overwritten</i>.", "createDungeon");
 
 ////////////////////////////////////////
 // Expressions
