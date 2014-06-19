@@ -7,7 +7,7 @@ function GetPluginSettings()
 		"description":	"Generates a random dungeon",
 		"author":		"Ubivis Media",
 		"help url":		"https://github.com/Ubivis/C2RPG-Essentials/tree/master",
-		"category":		"General",				// Prefer to re-use existing categories, but you can set anything here
+		"category":		"RPG Essentials",				// Prefer to re-use existing categories, but you can set anything here
 		"type":			"object",				// either "world" (appears in layout and is drawn), else "object"
 		"flags":		0						// uncomment lines to enable flags...
 						| pf_singleglobal		// exists project-wide, e.g. mouse, keyboard.  "type" must be "object".
@@ -42,14 +42,7 @@ function GetPluginSettings()
 //				script_name);		// corresponding runtime function name
 				
 // example				
-AddNumberParam("MinRooms", "Minimum Number of Rooms to be generated", "10");
-AddNumberParam("MaxRooms", "Maximum Number of Rooms to be generated", "20");
-AddNumberParam("MinSize", "Minimum Size of Map to be generated", "5");
-AddNumberParam("MaxSize", "Maximum Size of Map to be generated", "15");
-AddComboParamOption("Yes");
-AddComboParamOption("No");
-AddComboParam("SquashRooms", "Moving the rooms closer to one another to get rid of large gaps?");
-AddObjectParam("Array", "Select array to populate with dungeon");
+
 
 ////////////////////////////////////////
 // Actions
@@ -63,10 +56,16 @@ AddObjectParam("Array", "Select array to populate with dungeon");
 //			 script_name);		// corresponding runtime function name
 
 // example
-AddStringParam("Create Dungeon", "Create a dungeon and populate array.");
+AddNumberParam("MinRooms", "Minimum Number of Rooms to be generated", "10");
+AddNumberParam("MaxRooms", "Maximum Number of Rooms to be generated", "20");
+AddNumberParam("MinSize", "Minimum Size of Map to be generated", "5");
+AddNumberParam("MaxSize", "Maximum Size of Map to be generated", "15");
+AddNumberParam("MapSize", "Size of the generated Map", "100");
+AddComboParamOption("Yes");
+AddComboParamOption("No");
+AddComboParam("Squash","Squash Rooms", "If set to <b>yes</b>, this moves the generated rooms closer to each other");
+AddObjectParam("Array", "Select array to populate with dungeon");
 AddAction(0, af_none, "Create", "Dungeon", "Create Dungeon", "Create a dungeon and populate defined array. <b>NOTE:</b> <i>existing values will be overwritten</i>.", "createDungeon");
-AddStringParam("Squash Rooms", "Moving the generated rooms closer to one another to get rid of large gaps.");
-AddAction(1, af_none, "Squash", "Dungeon", "Squash Rooms", "Squash generated rooms.")
 
 ////////////////////////////////////////
 // Expressions
