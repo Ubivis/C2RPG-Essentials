@@ -41,7 +41,7 @@ cr.plugins_.UBIRDG = function(runtime)
 	{
 		this.type = type;
 		this.runtime = type.runtime;
-		
+
 		// any other properties you need, e.g...
 		// this.myValue = 0;
 	};
@@ -54,6 +54,7 @@ cr.plugins_.UBIRDG = function(runtime)
 		// note the object is sealed after this call; ensure any properties you'll ever need are set on the object
 		// e.g...
 		// this.myValue = 0;
+		cr.plugins_.UBIRDG.prototype.loaded = 0;
 	};
 	
 	// called whenever an instance is destroyed
