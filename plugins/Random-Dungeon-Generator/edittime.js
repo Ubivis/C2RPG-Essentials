@@ -3,7 +3,7 @@ function GetPluginSettings()
 	return {
 		"name":			"Dungeon Generator",				// as appears in 'insert object' dialog, can be changed as long as "id" stays the same
 		"id":			"UBIRDG",				// this is used to identify this plugin and is saved to the project; never change it
-		"version":		"0.1",					// (float in x.y format) Plugin version - C2 shows compatibility warnings based on this
+		"version":		"0.2",					// (float in x.y format) Plugin version - C2 shows compatibility warnings based on this
 		"description":	"Generates a random dungeon",
 		"author":		"Ubivis Media",
 		"help url":		"https://github.com/Ubivis/C2RPG-Essentials/tree/master",
@@ -80,6 +80,8 @@ AddAction(1, 0, "Create Dungeon", "Dungeon", "Create Dungeon", "Create a dungeon
 
 // example
 
+AddExpression(1, ef_return_number, "Get load status", "Loading", "LoadStatus", "Returns the status of the load, a 0 if current load has not completed, and a 1 if it has, reset to 0 any time something is loaded.");
+
 ////////////////////////////////////////
 ACESDone();
 
@@ -94,7 +96,7 @@ ACESDone();
 // new cr.Property(ept_link,		name,	link_text,		description, "firstonly")		// has no associated value; simply calls "OnPropertyChanged" on click
 
 var property_list = [
-	new cr.Property(ept_integer, 	"My property",		77,		"An example property.")
+		new cr.Property(ept_integer, "loaded", 0, "Dungeon generated?");		// an integer value
 	];
 	
 // Called by IDE when a new object type is to be created
