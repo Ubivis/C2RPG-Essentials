@@ -137,6 +137,7 @@ var Dungeon = {
     rooms: [],
     Generate: function (MinRoom, MaxRoom, MinSize, MaxSize, MapSize, Squash) {
         this.map = [];
+        cr.plugins_.UBIRDG.prototype.loaded = 0;
         for (var x = 0; x < MapSize; x++) {
             this.map[x] = [];
             for (var y = 0; y < MapSize; y++) {
@@ -214,6 +215,7 @@ var Dungeon = {
                 }
             }
         }
+        cr.plugins_.UBIRDG.prototype.loaded = 1;
        return this.map;
     },
     FindClosestRoom: function (room) {
@@ -327,17 +329,15 @@ var Helpers = {
 	
 	//////////////////////////////////////
 	// Expressions
-	function Exps() {};
-	
-	// the example expression
-	Exps.prototype.MyExpression = function (ret)	// 'ret' must always be the first parameter - always return the expression's result through it!
-	{
-		ret.set_int(1337);				// return our value
-		// ret.set_float(0.5);			// for returning floats
-		// ret.set_string("Hello");		// for ef_return_string
-		// ret.set_any("woo");			// for ef_return_any, accepts either a number or string
+	function Exps() {
+		Exps.prototype.LoadStatus = function (ret)	// 'ret' must always be the first parameter - always return the expression's result through it!
+		{
+			ret.set_int(cr.plugins_.UBIRDG.prototype.loaded);				// return our value
+		};
+
 	};
 	
+
 	// ... other expressions here ...
 	
 	pluginProto.exps = new Exps();
