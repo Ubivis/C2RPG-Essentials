@@ -304,11 +304,11 @@ var Helpers = {
 	// the example action
 	Acts.prototype.createDungeon = function (MinRooms, MaxRooms, MinSize, MaxSize, Size, squash, array_objs)
 	{
-	    	assert2(cr.plugins_.Arr, "[CSV2Array] Error:No Array object found.");
+	    	assert2(cr.plugins_.Arr, "[DungeonGenerator] Error:No Array object found.");
 	    	
         	var array_obj = array_objs.getFirstPicked();
         	var is_array_inst = (array_obj instanceof cr.plugins_.Arr.prototype.Instance);
-        	assert2(is_array_inst, "[CSV2Array] Error:Need an array object.");
+        	assert2(is_array_inst, "[DungeonGenerator] Error:Need an array object.");
         	
         	//prepare array to be filled with data
         	cr.plugins_.Arr.prototype.acts.SetSize.apply(array_obj, [Size, Size, 1]);
