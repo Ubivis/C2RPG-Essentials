@@ -96,7 +96,7 @@ ACESDone();
 // new cr.Property(ept_link,		name,	link_text,		description, "firstonly")		// has no associated value; simply calls "OnPropertyChanged" on click
 
 var property_list = [
-		new cr.Property(ept_integer, "loaded", 0, "Dungeon generated?");		// an integer value
+		new cr.Property(ept_integer, "loaded", 0, "Dungeon generated?")
 	];
 	
 // Called by IDE when a new object type is to be created
