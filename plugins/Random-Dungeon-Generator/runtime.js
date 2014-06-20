@@ -332,7 +332,7 @@ var Helpers = {
 	function Exps() {
 		Exps.prototype.LoadStatus = function (ret)	// 'ret' must always be the first parameter - always return the expression's result through it!
 		{
-			ret.set_int(int(cr.plugins_.Arr.prototype.loaded));				// return our value
+			ret.set_int(int(cr.plugins_.UBIRDG.prototype.loaded));				// return our value
 		};
 
 	};
